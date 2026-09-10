@@ -2,7 +2,7 @@
 
 The Rust CLI for the ElixCode platform — an OpenCode alternative in Elixir.
 
-🌐 **Homepage:** [https://elixcode.space](https://elixcode.space) · 🐙 **GitHub:** [https://github.com/elixcode-space/elixcode](https://github.com/elixcode-space/elix-code)
+ 🌐 **Homepage:** [https://elixcode.space](https://elixcode.space) · 🐙 **GitHub:** [https://github.com/elixcode-space/elixcode](https://github.com/elixcode-space/elixcode)
 
 ## What is ElixCode?
 
@@ -14,16 +14,6 @@ ElixCode is an open-source AI coding agent platform that combines:
 - **Sandbox execution** — Secure code execution
 - **Skills system** — Learnable domain knowledge
 - **Observability** — Token cost tracking, agent monitoring
-
-The `elixcode` CLI is the user-facing entry point, similar to:
-
-| Tool | What we borrow |
-|------|----------------|
-| [OpenCode](https://github.com/sst/opencode) | Multi-provider, slash commands, CLI-first |
-| [Claude Code](https://claude.ai) | Agentic loop, approval gates, streaming |
-| [Kilo](https://kilo.org) | Interactive terminal, session management |
-| [Cursor CLI](https://cursor.com) | Virtual filesystem, skills system |
-| [Aider](https://aider.chat) | Codebase map, edit mode |
 
 ## Overview
 
