@@ -1,0 +1,112 @@
+name: elixcode JS CLI — Build & Publish
+
+on:
+  push:
+    branches: [main]
+    tags: ["js-v*"]
+    paths:
+      - "js/**"
+      - ".github/workflows/elix-js.yml"
+      - "README.md"
+  pull_request:
+    paths:
+      - "js/**"
+      - ".github/workflows/elix-js.yml"
+      - "README.md"
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        runtime: [node, deno, bun]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        if: matrix.runtime == 'node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - name: Setup Deno
+        if: matrix.runtime == 'deno'
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: '2.x'
+      - name: Setup Bun
+        if: matrix.runtime == 'bun'
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install (Node)
+        if: matrix.runtime == 'node'
+        run: cd js && npm ci
+      - name: Install (Bun)
+        if: matrix.runtime == 'bun'
+        run: cd js && npm ci
+
+      - name: Type Check (Node)
+        if: matrix.runtime == 'node'
+        run: cd js && npx tsc --noEmit
+
+      - name: Type Check (Deno)
+        if: matrix.runtime == 'deno'
+        run: cd js && deno check src/cli-deno.ts
+
+      - name: Type Check (Bun)
+        if: matrix.runtime == 'bun'
+        run: cd js && npx tsc --noEmit
+
+      - name: Build (Node)
+        if: matrix.runtime == 'node'
+        run: cd js && npm run build
+
+  publish-npm:
+    needs: test
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/js-v')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+      - name: Publish elixcode (Node.js)
+        run: |
+          cd js
+          npm ci
+          npm run build
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish elixcode-bun (Bun)
+        run: |
+          mkdir -p /tmp/bun-pkg
+          cp -r js/* /tmp/bun-pkg/
+          cp js/bun-package.json /tmp/bun-pkg/package.json
+          cd /tmp/bun-pkg
+          npm ci
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-jsr:
+    needs: test
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/js-v')
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: '2.x'
+      - name: Publish @elixcode/elixcode (Deno via OIDC)
+        run: |
+          cd js
+          deno publish --allow-dirty
