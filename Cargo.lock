@@ -407,7 +407,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "elix"
+name = "elixcode"
 version = "0.1.0"
 dependencies = [
  "anyhow",
