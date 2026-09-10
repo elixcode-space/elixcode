@@ -210,14 +210,30 @@ curl https://api.elixcode.space/openapi.json
 open https://api.elixcode.space/docs
 ```
 
-## JavaScript CLI Variants
+### JavaScript CLI Variants
 
-This repo also contains TypeScript source for Node.js, Deno, and Bun in `js/`:
+This repo also contains TypeScript source for Node.js, Deno, and Bun in `js/`.
+These packages share the same source code in `clis/elixcode/js/` and the same
+command surface as the Rust `elixcode` CLI. All connect to
+`https://api.elixcode.space` by default.
+
+#### Runtime Variants
+
+| Runtime | Entry point | Package | Registry |
+|---------|-------------|---------|----------|
+| Node.js | `src/cli-entry.ts` | `elixcode` | npm |
+| Deno | `src/cli-deno.ts` | `@elixcode/elixcode` | JSR |
+| Bun | `src/cli-entry.ts` | `@elixcode/elixcode-bun` | npm |
+
+#### Quick Start (JS CLIs)
 
 ```bash
+export ELIXCODE_API_KEY="your-api-key"
+
 # Node.js
 cd js && npm install && npm run build
 npx elixcode chat
+npx elixcode ask "what does 2+2 equal?"
 
 # Deno
 deno run -A js/src/cli-deno.ts chat
@@ -227,11 +243,24 @@ cd js && bun install
 bun run src/cli-entry.ts chat
 ```
 
-| Runtime | Package | Registry |
-|---------|---------|----------|
-| Node.js | `elixcode` | npm |
-| Deno | `@elixcode/elixcode` | JSR |
-| Bun | `@elixcode/elixcode-bun` | npm |
+#### Build (JS CLIs)
+
+```bash
+# Node.js / npm
+cd js && npm install && npm run build
+
+# Deno
+deno run -A src/cli-deno.ts
+
+# Bun
+bun install && bun run src/cli-entry.ts
+```
+
+#### Commands (JS CLIs)
+
+All runtimes support the same command surface: `chat`, `ask`, `models`,
+`harnesses ls`, `loops patterns`, `sessions ls`, `fleet workers`, `obs agents`,
+`login [key]`, `config`, `health`.
 
 ## License
 
