@@ -47,8 +47,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/niranjanaryan/elixcode-opencode-alternative",
-    "directory": "clis/elixcode-js"
+    "url": "https://github.com/elixcode-space/elix",
+    "directory": "js"
   },
   "homepage": "https://api.elixcode.space"
 }
