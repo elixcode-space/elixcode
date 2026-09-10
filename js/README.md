@@ -1,8 +1,9 @@
 # @elixcode/elixcode-js — Unified JS CLI
 
+**clis/elixcode/js/** — TypeScript source for the Node.js, Deno, and Bun variants of the Elixcode user CLI.
+
 Source code for the TypeScript/Node.js, Deno, and Bun variants of the Elixcode
-user CLI. All three runtimes share the same source code; only the entry point
-and packaging configuration differ.
+Source code for the TypeScript/Node.js, Deno, and Bun variants of the Elixcode user CLI. All three runtimes share the same source code; only the entry point and packaging configuration differ.
 
 ## Runtime Variants
 
@@ -11,6 +12,25 @@ and packaging configuration differ.
 | Node.js | `src/cli-entry.ts` | `elixcode` | npm |
 | Deno | `src/cli-deno.ts` | `@elixcode/elixcode` | JSR |
 | Bun | `src/cli-entry.ts` | `@elixcode/elixcode-bun` | npm |
+
+## Quick Start
+
+```bash
+export ELIXCODE_API_KEY="your-api-key"
+
+# Node.js
+npm install
+npm run build
+npx elixcode chat
+npx elixcode ask "what does 2+2 equal?"
+
+# Deno
+deno run -A src/cli-deno.ts chat
+
+# Bun
+bun install
+bun run src/cli-entry.ts chat
+```
 
 ## Build
 
