@@ -36,7 +36,7 @@ fn mcp_config_path() -> Result<PathBuf> {
 fn list_mcp_servers(cfg: &Config) {
     if cfg.mcp_servers.is_empty() {
         println!("No MCP servers configured.");
-        println!("Add one: elix mcp add <name> --transport stdio --command <cmd>");
+        println!("Add one: elixcode mcp add <name> --transport stdio --command <cmd>");
         return;
     }
 

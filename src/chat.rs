@@ -49,7 +49,7 @@ pub async fn run(
     // Check server health
     if !client.health().await? {
         eprintln!("{} Server unreachable at {}", "✗".red(), client.cfg.server);
-        eprintln!("  Start the server:  elix --gateway");
+        eprintln!("  Start the server:  elixcode --gateway");
         std::process::exit(1);
     }
 
@@ -176,7 +176,7 @@ async fn run_repl(
 
     let _ = rl.load_history(&hist_path);
 
-    println!("{} Elixcode — {} mode, {} model", "elix".green().bold(),
+    println!("{} Elixcode — {} mode, {} model", "elixcode".green().bold(),
         agent, cfg.default_model);
     println!("{}", "─".repeat(60).cyan());
     println!("Type your message, or /help for commands. Ctrl+D to exit.\n");

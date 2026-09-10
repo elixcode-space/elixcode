@@ -1,4 +1,4 @@
-//! Agent monitoring commands (`elix monitor`).
+//! Agent monitoring commands (`elixcode monitor`).
 //!
 //! Wraps the `agent-top` terminal dashboard for local coding agents
 //! (Claude Code, Codex, Gemini CLI, OpenCode): live dashboard, cost and
@@ -284,11 +284,11 @@ fn install_instructions() {
             "⚠  agent-top is not installed. Install it with:"
         ).yellow().bold()
     );
-    println!("  After installation, verify with: elix monitor available");
+    println!("  After installation, verify with: elixcode monitor available");
 }
 
 fn not_installed_help() -> String {
-    "agent-top is not installed — run `elix monitor install` for setup instructions".to_string()
+    "agent-top is not installed — run `elixcode monitor install` for setup instructions".to_string()
 }
 
 /// Find `agent-top` on PATH without spawning (checked before running it).

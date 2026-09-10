@@ -39,7 +39,7 @@ pub async fn handle(cfg: Config, action: Option<crate::SessionsAction>, _json: b
 
 fn list_sessions(sessions: &[SessionSummary]) {
     if sessions.is_empty() {
-        println!("No sessions. Start a conversation with `elix chat`");
+        println!("No sessions. Start a conversation with `elixcode chat`");
         return;
     }
 

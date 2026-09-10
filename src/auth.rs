@@ -89,7 +89,7 @@ impl AuthState {
             plan: plan.to_string(),
             exp: exp.timestamp(),
             iat: now.timestamp(),
-            iss: "elixcode".to_string(),
+            iss: "elixcodecode".to_string(),
         };
 
         let token = encode(
@@ -270,6 +270,6 @@ fn whoami(cfg: &crate::config::Config) {
     } else if auth.api_key.is_some() {
         println!("Logged in with API key (server: {})", cfg.server);
     } else {
-        println!("Not logged in. Run `elix auth login`");
+        println!("Not logged in. Run `elixcode auth login`");
     }
 }

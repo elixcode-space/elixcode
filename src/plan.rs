@@ -50,9 +50,9 @@ pub async fn plan(cfg: Config, task: Vec<String>, _json: bool) -> Result<()> {
 
     println!("\n\n{}", "─".repeat(60).cyan());
     println!("{} Review the plan above. To execute step N, run:", "→".cyan());
-    println!("  elix run --step N");
+    println!("  elixcode run --step N");
     println!("{} To execute all steps:", "→".cyan());
-    println!("  elix run --confirm");
+    println!("  elixcode run --confirm");
 
     Ok(())
 }

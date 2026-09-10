@@ -26,10 +26,10 @@ use anyhow::Result;
 
 #[derive(Parser, Debug)]
 #[command(
-    name = "elix",
+    name = "elixcode",
     version,
     about = "Elixcode user CLI — OpenCode/Cursor/Claude Code-style AI coding agent",
-    long_about = "elix is the user-facing CLI for the Elixcode platform. \
+    long_about = "elixcode is the user-facing CLI for the Elixcode platform. \
                   Talk to LLMs, edit code, run agents, share sessions, and \
                   work across providers (OpenRouter, Anthropic, OpenAI, self-hosted)."
 )]
@@ -355,7 +355,7 @@ async fn main() -> Result<()> {
 }
 
 fn version_info() {
-    println!("elix {}", env!("CARGO_PKG_VERSION"));
+    println!("elixcode {}", env!("CARGO_PKG_VERSION"));
     println!("rustc {}", rustc_version_runtime());
     println!("target {}", std::env::consts::ARCH);
     println!();

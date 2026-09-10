@@ -56,7 +56,7 @@ pub async fn run(
     println!("\n{}", "─".repeat(60).cyan());
     println!("{}", response);
     println!("{}", "─".repeat(60).cyan());
-    println!("\nEdit session complete. Use `elix edit {} -- \"instruction\"` to make specific changes.", file.display());
+    println!("\nEdit session complete. Use `elixcode edit {} -- \"instruction\"` to make specific changes.", file.display());
 
     Ok(())
 }

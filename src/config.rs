@@ -1,9 +1,9 @@
-//! Configuration management for elix (Rust user CLI).
+//! Configuration management for.elixcode (Rust user CLI).
 //!
 //! Config is loaded from (in priority order):
-//!   1. Environment variables (ELIXCODE_*, ELIX_*)
+//!   1. Environment variables (ELIXCODE_*, ELIXCODE_*)
 //!   2. CLI flags
-//!   3. ~/.elixcode/config.toml
+//!   3. ~/.elixcodecode/config.toml
 
 use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
@@ -134,8 +134,8 @@ impl Default for Config {
 
 fn default_server() -> String {
     std::env::var("ELIXCODE_SERVER")
-        .or_else(|_| std::env::var("ELIX_SERVER"))
-        .unwrap_or_else(|_| "https://api.elixcode.space".to_string())
+        .or_else(|_| std::env::var("ELIXCODE_SERVER"))
+        .unwrap_or_else(|_| "https://api.elixcodecode.space".to_string())
 }
 
 fn default_providers() -> HashMap<String, ProviderConfig> {
@@ -226,7 +226,7 @@ impl Config {
         Ok(cfg)
     }
 
-    /// Save config to ~/.elixcode/config.toml
+    /// Save config to ~/.elixcodecode/config.toml
     pub fn save(&self) -> Result<()> {
         let path = config_file_path()?;
         if let Some(parent) = path.parent() {
@@ -264,7 +264,7 @@ impl Config {
 pub fn config_file_path() -> Result<PathBuf> {
     let home = dirs::home_dir()
         .context("no home directory found")?;
-    Ok(home.join(".elixcode").join("config.toml"))
+    Ok(home.join(".elixcodecode").join("config.toml"))
 }
 
 /// Handle config subcommands
