@@ -7,9 +7,9 @@ The Rust CLI for the ElixCode platform — an OpenCode alternative in Elixir.
 ## What is ElixCode?
 
 ElixCode is an open-source AI coding agent platform that combines:
-- **LLM Gateway** (Portkey-AI style) — Route to 400+ OpenRouter models + self-hosted inference
-- **Agentic TUI** (Claude Code / OpenCode / Kilo style) — Interactive terminal interface
-- **Fleet orchestration** (Medulla-style) — Concurrent multi-agent workflows
+- **LLM Gateway** — Route to 400+ OpenRouter models + self-hosted inference
+- **Agentic TUI** — Interactive terminal interface
+- **Fleet orchestration** — Concurrent multi-agent workflows
 - **Loop Engineering** — Automated repeated tasks (daily triage, CI sweeping)
 - **Sandbox execution** — Secure code execution
 - **Skills system** — Learnable domain knowledge
@@ -18,9 +18,9 @@ ElixCode is an open-source AI coding agent platform that combines:
 ## Overview
 
 `elixcode` is the end-user agentic CLI for the ElixCode platform. It provides an
-interactive TUI (similar to Claude Code / Cursor), single-prompt agentic mode,
-model listing, harness management, loop engineering, and more — all connecting
-to the public gateway at `https://api.elixcode.space` by default.
+interactive TUI, single-prompt agentic mode, model listing, harness management,
+loop engineering, and more — all connecting to the public gateway at
+`https://api.elixcode.space` by default.
 
 ## Installation
 
