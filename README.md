@@ -1,6 +1,6 @@
 # elixcode
 
-The Rust CLI for the ElixCode platform — an OpenCode alternative in Elixir.
+**elixcode/** — Rust CLI repository for the ElixCode platform.
 
  🌐 **Homepage:** [https://elixcode.space](https://elixcode.space) · 🐙 **GitHub:** [https://github.com/elixcode-space/elixcode](https://github.com/elixcode-space/elixcode)
 
