@@ -1,0 +1,50 @@
+{
+  "name": "@elixcode/elixcode-bun",
+  "version": "0.9.2",
+  "description": "Elixcode user CLI (Bun) — OpenCode alternative in Elixir",
+  "bin": {
+    "elixcode-bun": "../src/cli-entry.ts"
+  },
+  "type": "module",
+  "main": "../src/cli-entry.ts",
+  "engines": {
+    "bun": ">=1.1"
+  },
+  "files": [
+    "../src/",
+    "../README.md"
+  ],
+  "scripts": {
+    "start": "bun run ../src/cli-entry.ts",
+    "dev": "tsx ../src/cli-entry.ts",
+    "build": "bun build ../src/cli-entry.ts --outdir ../dist --format=esm"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "ora": "^8.0.0",
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.10.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "elixcode",
+    "opencode",
+    "ai-coding",
+    "agent",
+    "cli",
+    "bun"
+  ],
+  "author": "ElixCode",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niranjanaryan/elixcode-opencode-alternative",
+    "directory": "clis/elixcode-js/bun"
+  },
+  "homepage": "https://api.elixcode.space"
+}

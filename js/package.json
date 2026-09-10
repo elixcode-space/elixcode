@@ -1,0 +1,54 @@
+{
+  "name": "elixcode",
+  "version": "0.9.2",
+  "description": "Elixcode user CLI (TypeScript) — OpenCode alternative in Elixir",
+  "bin": {
+    "elixcode": "dist/cli-entry.js"
+  },
+  "type": "module",
+  "main": "./dist/cli-entry.js",
+  "engines": {
+    "node": ">=18",
+    "npm": ">=9"
+  },
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/cli-entry.ts --format cjs,esm --dts",
+    "dev": "tsx src/cli-entry.ts",
+    "link": "npm link",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "ora": "^8.0.0",
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.10.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.5.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "elixcode",
+    "opencode",
+    "ai-coding",
+    "agent",
+    "cli",
+    "typescript"
+  ],
+  "author": "ElixCode",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niranjanaryan/elixcode-opencode-alternative",
+    "directory": "clis/elixcode-js"
+  },
+  "homepage": "https://api.elixcode.space"
+}
