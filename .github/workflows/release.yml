@@ -8,50 +8,51 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build-linux:
-    name: Build (Linux ${{ matrix.target }})
+  build-linux-x86:
+    name: Build (Linux x86_64)
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        target: [x86_64-unknown-linux-gnu, aarch64-unknown-linux-gnu]
-        include:
-          - target: x86_64-unknown-linux-gnu
-            artifact: elixcode-x86_64-unknown-linux-gnu
-          - target: aarch64-unknown-linux-gnu
-            artifact: elixcode-aarch64-unknown-linux-gnu
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Build
+        run: cargo build --release
+      - name: Package
+        run: |
+          mkdir -p release
+          cp target/release/elixcode release/
+          tar -czf elixcode-x86_64-unknown-linux-gnu.tar.gz -C release elixcode
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: elixcode-x86_64-unknown-linux-gnu
+          path: elixcode-x86_64-unknown-linux-gnu.tar.gz
+
+  build-linux-arm:
+    name: Build (Linux ARM64)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
+          targets: aarch64-unknown-linux-gnu
       - name: Install cross-compilation tools
-        if: matrix.target == 'aarch64-unknown-linux-gnu'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-aarch64-linux-gnu
+        run: sudo apt-get install -y gcc-aarch64-linux-gnu
       - name: Build
         run: |
-          if [[ "${{ matrix.target }}" == "x86_64-unknown-linux-gnu" ]]; then
-            cargo build --release
-          else
-            cargo build --release --target ${{ matrix.target }}
-          fi
+          sudo apt-get install -y gcc-aarch64-linux-gnu
+          CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc cargo build --release --target aarch64-unknown-linux-gnu
       - name: Package
         run: |
-          if [[ "${{ matrix.target }}" == "x86_64-unknown-linux-gnu" ]]; then
-            target_dir="target/release"
-          else
-            target_dir="target/${{ matrix.target }}/release"
-          fi
           mkdir -p release
-          cp $target_dir/elixcode release/
-          tar -czf ${{ matrix.artifact }}.tar.gz -C release elixcode
+          cp target/aarch64-unknown-linux-gnu/release/elixcode release/
+          tar -czf elixcode-aarch64-unknown-linux-gnu.tar.gz -C release elixcode
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact }}
-          path: ${{ matrix.artifact }}.tar.gz
+          name: elixcode-aarch64-unknown-linux-gnu
+          path: elixcode-aarch64-unknown-linux-gnu.tar.gz
 
   build-macos-x86:
     name: Build (macOS Intel)
@@ -94,7 +95,7 @@ jobs:
           path: elixcode-aarch64-apple-darwin.tar.gz
 
   release:
-    needs: [build-linux, build-macos-x86, build-macos-arm]
+    needs: [build-linux-x86, build-linux-arm, build-macos-x86, build-macos-arm]
     runs-on: ubuntu-latest
     permissions:
       contents: write
